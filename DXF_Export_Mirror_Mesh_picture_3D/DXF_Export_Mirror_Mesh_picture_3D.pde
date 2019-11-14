@@ -1,4 +1,4 @@
-//DDF 2018
+//DDF 2019
 //  press R to export DXF. replace the image in the data folder
 
 import processing.dxf.*;
@@ -25,7 +25,7 @@ void setup() {
 
   picture = loadImage("yulie3.png");
   picture.resize(width, height);
-   //picture.filter(BLUR,10);
+  picture.filter(BLUR,7);  // soften the image
 }
 
 
