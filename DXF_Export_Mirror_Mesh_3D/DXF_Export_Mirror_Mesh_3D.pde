@@ -1,5 +1,5 @@
 
-// DDF 2019
+// DDF 2020
 // pose to the camera and press R to export DXF
 
 import processing.dxf.*;
@@ -33,7 +33,7 @@ void draw() {
   if (video.available()) {
     video.read();
     video.loadPixels();
-    //video.filter(BLUR,7);  // try this to soften the image
+    video.filter(BLUR,7);  // try this to soften the image
     background(0);
     fill(0,255,0);
     stroke (0);

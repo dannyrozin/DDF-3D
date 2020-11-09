@@ -1,8 +1,6 @@
 
-/*
-DDF 2019
- Gets data from text file and generates a series of spheres
- */
+/* DDF 2020
+ Gets data from text file and generates a series of spheres */
 int[] data;
 
 void setup() {
