@@ -1,4 +1,4 @@
-// DDF 2020
+// DDF 2021
 //  Make sure the audio input is set to the internal mic then sing into it to get nice waves
 //    and press R to record DXF
 
@@ -68,7 +68,7 @@ void draw()
   for (int i = 0; i < in.bufferSize() - skip; i+=skip) {
     float thisReading = 20+in.left.get(i)*50;
     float nextReading = 20+in.left.get(i+skip)*50;
-
+println (thisReading);
     beginShape();
     vertex(i, 50 + thisReading, 0);
     vertex(i, 50 - thisReading, 50);

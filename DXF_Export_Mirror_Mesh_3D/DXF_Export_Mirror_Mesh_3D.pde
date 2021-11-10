@@ -1,5 +1,5 @@
 
-// DDF 2020
+// DDF 2021
 // pose to the camera and press R to export DXF
 
 import processing.dxf.*;
@@ -25,6 +25,7 @@ void setup() {
   // Uses the default video input, see the reference if this causes an error
   video = new Capture(this, width, height, 15);
   video.start();
+  image (video, 0,0); //hack to make it work in processing 4
 }
 
 

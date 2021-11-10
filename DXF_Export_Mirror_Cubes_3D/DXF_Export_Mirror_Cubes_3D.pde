@@ -1,14 +1,13 @@
-//DDF 2020
+//DDF 2021
 // pose to the camera and press R to export DXF
 
 import processing.dxf.*;
 import processing.video.*;
 
 // Size of each cell in the grid
-int cellSize = 18;
-// Number of columns and rows in our system
-int cols, rows;
-// Variable for capture device
+int cellSize = 18;   // Number of columns and rows in our system
+int cols, rows;     // Variable for capture device
+
 Capture video;
 boolean record = false;
 
@@ -23,37 +22,38 @@ void setup() {
   // Uses the default video input, see the reference if this causes an error
   video = new Capture(this, width, height);
   video.start();
+  image(video, 0, 0);  // this is a workaround to make Processing 4 work
 }
 
 
-void draw() { 
+void draw() {
   rotateY(0.2);               // rotating a bit so that we can appreciate the 3D
   if (video.available()) {
     video.read();
     video.loadPixels();
     background(0);
-    fill(255,255,0);
+    fill(255, 255, 0);
     stroke (0);
     if (record == true) {
       beginRaw(DXF, "output.dxf"); // Start recording to the file
       noStroke();                    // we dont want the outline, just the faces of the boxes
     }
-   
-    for (int i = 0; i < cols;i++) {          // Begin loop for columns     
-      for (int j = 0; j < rows;j++) {        // Begin loop for rows
 
-        // Where are we, pixel-wise?
-        int x = i * cellSize;
+    for (int i = 0; i < cols; i++) {          // Begin loop for columns
+      for (int j = 0; j < rows; j++) {        // Begin loop for rows
+
+        
+        int x = i * cellSize;                  // Where are we, pixel-wise?
         int y = j * cellSize;
         int loc = (video.width - x - 1) + y*video.width; // Reversing x to mirror the image
 
-        // Each oval is sized  determined by brightness
-        color c = video.pixels[loc];
-        float sz = ((brightness(c)) / 255.0) * cellSize*1.0; 
        
+        color c = video.pixels[loc];                  // Each oval is sized  determined by brightness
+        float sz = ((brightness(c)) / 255.0) * cellSize*1.0;
+
         pushMatrix();
-        translate(x + cellSize/2, y + cellSize/2,sz/2);   // translate put the current x and y at the 0,0
-        box(sz,sz, sz);                                    // draw a box corelated to the brightness
+        translate(x + cellSize/2, y + cellSize/2, sz/2);   // translate put the current x and y at the 0,0
+        box(sz, sz, sz);                                    // draw a box corelated to the brightness
         popMatrix();
       }
     }
