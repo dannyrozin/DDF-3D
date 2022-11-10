@@ -1,7 +1,0 @@
-newmtl ourExport
-Ka 1.000 1.000 1.000
-Kd 1.000 1.000 1.000
-Ks 0.000 0.000 0.000
-d 1.0
-map_Ka ourExport.png
-map_Kd ourExport.png
