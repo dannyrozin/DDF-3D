@@ -1,6 +1,7 @@
 
-// DDF 2023
+// DDF 2024
 // pose to the camera and press R to export DXF
+// slide mouse to increase the blur and softness of the 3D surface
 
 import processing.dxf.*;
 import processing.video.*;
@@ -23,18 +24,20 @@ void setup() {
   rectMode(CENTER);
 
   // Uses the default video input, see the reference if this causes an error
-  video = new Capture(this, width, height, 15);
+  video = new Capture(this, width, height);
   video.start();
   image (video, 0,0); //hack to make it work in processing 4
 }
 
 
 void draw() { 
-  rotateY(0.5);               // rotating a bit so that we can appreciate the 3D
+  translate(width/2,0);
+  rotateY(PI/3);               // rotating a bit so that we can appreciate the 3D
+    translate(-width/2,0);
   if (video.available()) {
     video.read();
     video.loadPixels();
-    video.filter(BLUR,7);  // try this to soften the image
+    video.filter(BLUR,mouseX/100);  // try this to soften the image
     background(0);
     fill(0,255,0);
     stroke (0);
