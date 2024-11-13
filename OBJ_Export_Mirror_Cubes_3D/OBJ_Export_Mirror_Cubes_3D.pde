@@ -14,7 +14,7 @@ Capture video;
 boolean record = false;
 
 void setup() {
-  size(640, 480, P3D);           // DXF like P3D
+  size(640, 480, P3D);          
   //set up columns and rows
   cols = width / cellSize;
   rows = height / cellSize;
