@@ -26,20 +26,20 @@ void setup() {
   // Uses the default video input, see the reference if this causes an error
   video = new Capture(this, width, height);
   video.start();
-  image (video, 0,0); //hack to make it work in processing 4
+  image (video, 0, 0); //hack to make it work in processing 4
 }
 
 
-void draw() { 
-  translate(width/2,0);
+void draw() {
+  translate(width/2, 0);
   rotateY(PI/3);               // rotating a bit so that we can appreciate the 3D
-    translate(-width/2,0);
+  translate(-width/2, 0);
   if (video.available()) {
     video.read();
     video.loadPixels();
-    video.filter(BLUR,mouseX/100);  // try this to soften the image
+    video.filter(BLUR, mouseX/100);  // try this to soften the image
     background(0);
-    fill(0,255,0);
+    fill(0, 255, 0);
     stroke (0);
     noStroke();
     if (record == true) {
@@ -47,9 +47,9 @@ void draw() {
       noStroke();                    // we dont want the outline, just the faces of the boxes
     }
     // Begin loop for columns
-    for (int i = 0; i < cols;i++) {
+    for (int i = 0; i < cols; i++) {
       // Begin loop for rows
-      for (int j = 0; j < rows;j++) {
+      for (int j = 0; j < rows; j++) {
 
         // Where are we, pixel-wise?
         int x = i * cellSize;
@@ -61,23 +61,23 @@ void draw() {
         brightnesses[x][y] = 3*((brightness(c)) / 255.0) * cellSize*5.0; // need to be inverted , the ovals are black
       }
     }
-    
-    
-    for (int i = 0; i < cols-1;i++) {
-      for (int j = 0; j < rows-1;j++) {
-         int x = i * cellSize;
+
+
+    for (int i = 0; i < cols-1; i++) {
+      for (int j = 0; j < rows-1; j++) {
+        int x = i * cellSize;
         int y = j * cellSize;
-         int loc = (video.width - x - 1) + y*video.width; // Reversing x to mirror the image
+        int loc = (video.width - x - 1) + y*video.width; // Reversing x to mirror the image
 
         // Each oval is sized  determined by brightness
         color c = video.pixels[loc];
         fill(c);
-       beginShape();
-       vertex(x,y,brightnesses[x][y]);
-         vertex(x+cellSize,y,brightnesses[x+cellSize][y]);
-          vertex(x+cellSize,y+cellSize,brightnesses[x+cellSize][y+cellSize]);
-          vertex(x,y+cellSize,brightnesses[x][y+cellSize]);
-          endShape(CLOSE);
+        beginShape();
+        vertex(x, y,    -brightnesses[x][y]);
+        vertex(x+cellSize, y, -brightnesses[x+cellSize][y]);
+        vertex(x+cellSize, y+cellSize, -brightnesses[x+cellSize][y+cellSize]);
+        vertex(x, y+cellSize, -brightnesses[x][y+cellSize]);
+        endShape(CLOSE);
       }
     }
 

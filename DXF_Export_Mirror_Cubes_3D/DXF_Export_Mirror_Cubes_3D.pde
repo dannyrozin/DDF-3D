@@ -39,17 +39,12 @@ void draw() {
       noStroke();                    // we dont want the outline, just the faces of the boxes
     }
 
-    for (int i = 0; i < cols; i++) {          // Begin loop for columns
-      for (int j = 0; j < rows; j++) {        // Begin loop for rows
+    for (int x = 0; x < width; x+=cellSize) {          // Begin loop for columns
+      for (int y = 0; y < height; y+=cellSize) {        // Begin loop for rows
 
-        
-        int x = i * cellSize;                  // Where are we, pixel-wise?
-        int y = j * cellSize;
-        int loc = (video.width - x - 1) + y*video.width; // Reversing x to mirror the image
-
-       
-        color c = video.pixels[loc];                  // Each oval is sized  determined by brightness
-        float sz = ((brightness(c)) / 255.0) * cellSize*1.0;
+        // Each oval is sized  determined by brightness
+        color c =video.get(x, y);
+        float sz =map(brightness(c), 0, 255, 0, cellSize);
 
         pushMatrix();
         translate(x + cellSize/2, y + cellSize/2, sz/2);   // translate put the current x and y at the 0,0
