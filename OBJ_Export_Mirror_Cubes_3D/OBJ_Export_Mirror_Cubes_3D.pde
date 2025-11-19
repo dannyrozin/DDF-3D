@@ -1,4 +1,4 @@
-//DDF 2024
+//DDF 2025
 // pose to the camera and press R to export OBJ
 // need to add library OBJExport from "add library"
 
@@ -11,7 +11,7 @@ int cellSize = 18;
 int cols, rows;
 // Variable for capture device
 Capture video;
-boolean record = false;
+boolean exportOBJ = false;
 
 void setup() {
   size(640, 480, P3D);          
@@ -36,7 +36,7 @@ void draw() {
     background(0);
     fill(255, 255, 0);
     stroke (0);
-    if (record) {
+    if (exportOBJ==true) {
       beginRecord("nervoussystem.obj.OBJExport", "filename.obj");
       noStroke();
     }
@@ -60,15 +60,15 @@ void draw() {
       }
     }
 
-    if (record == true) {
+    if (exportOBJ == true) {
          endRecord();
       println("recorded OBJ");
-      record = false; // Stop recording to the file
+      exportOBJ = false; // Stop recording to the file
     }
   }
 }
 void keyPressed() {
   if (key == 'R' || key == 'r') { // Press R to save the file
-    record = true;
+    exportOBJ = true;
   }
 }
