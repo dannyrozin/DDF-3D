@@ -1,6 +1,6 @@
 // DDF 2024
 //  Make sure the audio input is set to the internal mic then sing into it to get nice waves
-//   and press R to record DXF
+//   and press R to recording DXF
 
 import processing.dxf.*;
 import processing.sound.*;
@@ -8,7 +8,7 @@ import processing.sound.*;
 // Declare the sound source and Waveform analyzer variables
 AudioIn input;
 Waveform waveform;
-boolean record = false;
+boolean recording = false;
 int samples = 300;
 void setup()
 {
@@ -24,13 +24,13 @@ void setup()
 
 void draw()
 {
-  if (record == ! true)rotateY(0.3);
+  if (recording == ! true)rotateY(0.3);
   background(0);
   noStroke();
   fill(0, 0, 255);
 
-  if (record == true) {
-    beginRaw(DXF, "output.dxf"); // Start recording to the file
+  if (recording == true) {
+    beginRaw(DXF, "output.dxf"); // Start recordinging to the file
   }
 
   waveform.analyze();
@@ -49,15 +49,15 @@ void draw()
     endShape(CLOSE);
   }
 
-  if (record == true) {
+  if (recording == true) {
     endRaw();
-    record = false; // Stop recording to the file
+    recording = false; // Stop recordinging to the file
   }
 }
 
 void keyPressed() {
   if (key == 'R' || key == 'r') { // Press R to save the file
-    record = true;
+    recording = true;
     println("Exported DXF");
   }
 }

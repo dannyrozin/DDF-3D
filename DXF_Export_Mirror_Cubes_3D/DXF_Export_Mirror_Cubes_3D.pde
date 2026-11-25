@@ -9,7 +9,7 @@ int cellSize = 18;   // Number of columns and rows in our system
 int cols, rows;     // Variable for capture device
 
 Capture video;
-boolean record = false;
+boolean recording = false;
 
 void setup() {
   size(640, 480, P3D);           // DXF like P3D
@@ -34,8 +34,8 @@ void draw() {
     background(0);
     fill(255, 255, 0);
     stroke (0);
-    if (record == true) {
-      beginRaw(DXF, "output.dxf"); // Start recording to the file
+    if (recording == true) {
+      beginRaw(DXF, "output.dxf"); // Start recordinging to the file
       noStroke();                    // we dont want the outline, just the faces of the boxes
     }
 
@@ -53,15 +53,15 @@ void draw() {
       }
     }
 
-    if (record == true) {
+    if (recording == true) {
       endRaw();
-      println("recorded DXF");
-      record = false; // Stop recording to the file
+      println("recordinged DXF");
+      recording = false; // Stop recordinging to the file
     }
   }
 }
 void keyPressed() {
   if (key == 'R' || key == 'r') { // Press R to save the file
-    record = true;
+    recording = true;
   }
 }
